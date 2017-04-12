@@ -27,6 +27,7 @@ public class Delaunay {
             delaunayTriangulator.triangulate();
 
             List<Triangle2D> triangleSoup = delaunayTriangulator.getTriangles();
+            System.out.println("生成了"+triangleSoup.size()+"个三角形");
             result=doEdge(triangleSoup,floatList);
         } catch (NotEnoughPointsException e) {
         }

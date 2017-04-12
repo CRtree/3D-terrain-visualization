@@ -23,7 +23,6 @@ public class MyView extends GLSurfaceView {
     private final float TOUCH_SCALE_FACTOR = 180.0f/320;//角度缩放比例
     private float mPreviousY;//上次的触控位置Y坐标
     private float mPreviousX;//上次的触控位置X坐标
-    int textureId;//系统分配的纹理id
 
     SceneRenderer mRenderer;
 
@@ -54,6 +53,10 @@ public class MyView extends GLSurfaceView {
 
     private class SceneRenderer implements GLSurfaceView.Renderer{
 
+        //山的纹理id
+        int mountionId;
+        int rockId;
+
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
             //设置屏幕背景色RGBA
@@ -64,7 +67,8 @@ public class MyView extends GLSurfaceView {
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
             //初始化纹理
             try {
-                initTexture();
+                mountionId = initTexture("timg-2.jpeg");
+                rockId = initTexture("timg.jpeg");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -81,7 +85,7 @@ public class MyView extends GLSurfaceView {
             //调用此方法计算产生透视投影矩阵
             MatrixState.setProjectFrustum(-ratio, ratio, -1, 1, 1, 10);
             // 调用此方法产生摄像机9参数位置矩阵
-            MatrixState.setCamera(0, -2f, 3.5f,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
+            MatrixState.setCamera(0, 0f, 3.5f,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
 
             MatrixState.setInitMatrix();
         }
@@ -97,7 +101,7 @@ public class MyView extends GLSurfaceView {
 
             //绘制三角形对
             MatrixState.pushMatrix();
-            tle.drawSelf(textureId);
+            tle.drawSelf(mountionId,rockId);
             MatrixState.popMatrix();
 
             //恢复现场
@@ -105,23 +109,28 @@ public class MyView extends GLSurfaceView {
         }
     }
 
-    public void initTexture() throws IOException//textureId
+    public int initTexture(String filename) throws IOException//textureId
     {
         //生成纹理ID
         int[] textures = new int[1];
         GLES20.glGenTextures(1, textures, 0);  //产生的纹理id的数量 纹理id的数组 偏移量
-        textureId=textures[0];
+        int textureId=textures[0];
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_NEAREST);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_REPEAT);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_REPEAT);
         //通过输入流加载图片===============begin===================
-        InputStream is = this.getResources().getAssets().open("th.jpeg");
+        InputStream is = this.getResources().getAssets().open(filename);
         Bitmap bitmapTmp = BitmapFactory.decodeStream(is);
         is.close();
         //实际加载纹理
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmapTmp, 0 );  //纹理类型，在OpenGL ES中必须为GL10.GL_TEXTURE_2D
+
+        //自动生成Mipmap纹理
+        GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D);
+
         bitmapTmp.recycle(); 		  //纹理加载成功后释放图片
+        return textureId;
     }
 }

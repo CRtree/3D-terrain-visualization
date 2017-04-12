@@ -5,6 +5,7 @@ attribute vec2 aTexCoor;    //顶点纹理坐标
 uniform vec3 uLightLocation;  //光源位置
 uniform vec3 uCamera;		//摄像机位置
 
+varying float currZ;				//用于传递给片元着色器的Z坐标
 varying vec2 vTextureCoord;     //用于传递给片元着色器的变量
 varying vec4 vAmbient;			//用于传递给片元着色器的环境光最终强度
 varying vec4 vDiffuse;          //用于传递给片元着色器的散射光最终强度
@@ -33,7 +34,8 @@ void main()
    vTextureCoord = aTexCoor;//将接收的纹理坐标传递给片元着色器
    vec4 diffuseTemp,specularTemp;   //用来接收三个通道最终强度的变量
    pointLight(diffuseTemp,specularTemp,uLightLocation,vec4(0.8,0.8,0.8,1.0),vec4(0.6,0.6,0.6,1.0));
-   vAmbient= vec4(0.3,0.3,0.3,1.0);    //将环境光最终强度传给片元着色器
+   vAmbient= vec4(0.25,0.25,0.25,1.0);    //将环境光最终强度传给片元着色器
    vDiffuse=diffuseTemp;    //将散射光最终强度传给片元着色器
    vSpecular=specularTemp; 		//将镜面光最终强度传给片元着色器
+   currZ=aPosition.z;		//将顶点的Y坐标传递给片元着色器
 }

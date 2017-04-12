@@ -1,13 +1,11 @@
 package android.zuoxiao.com.demo2;
 
 import android.content.res.Resources;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,47 +13,16 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by zuoxiao on 2017/4/5.
  */
 
 public class DataLoad {
-    //测试数据用
-    public static List<Float> readDataforTest(){
-        File file = new File("/Users/zuoxiao/常用资料/毕业设计/资料/示例数据/数据/数据.txt");
-        List<Float> dataSource = new ArrayList<>();
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String s;
-            while((s = br.readLine())!=null){
-                if(s!="") {
-                    String[] temp = s.split("\t");
-                    for (int i = 0; i < temp.length; i++) {
-                        double data = Double.parseDouble(temp[i]);
-                        float res = (float) data;
-                        if (data>0) {
-                            res = (float) (data - Math.floor(data));
-                        }
-                        else {
-                            res = (float) (data - Math.round(data));
-                        }
-                        dataSource.add(res);
-                    }
-                }
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.w(TAG, "readDataFromFile: read datafile failed." );
-        }
-        return dataSource;
-    }
+    public static float scaleX = 0;
+    public static float scaleY = 0;
+    public static float scaleZ = 0;
 
-    //从ASC文件中读取数据
-
-    /**
+    /**从ASC文件中读取数据
      * ncols         313
      nrows         271
      xllcorner     636373.250
@@ -73,14 +40,14 @@ public class DataLoad {
         float xllcorner=0;//第一个像素的x坐标
         float yllcorner=0;//第一个像素的y坐标
 
-        File file = new File("/Users/zuoxiao/常用资料/毕业设计/资料/示例数据/dem包/7.asc");
+        //File file = new File("/Users/zuoxiao/Downloads/s/s1.asc");
         List<Float> dataSource = new ArrayList<>();
         try {
             int row=0;
             InputStream inputStream = r.getAssets().open(fname);
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader br = new BufferedReader(inputStreamReader);
-            //BufferedReader br = new BufferedReader(new FileReader(file));
+           // BufferedReader br = new BufferedReader(new FileReader(file));
             String s;
             while((s = br.readLine())!=null){
                 if(s!="") {
@@ -104,16 +71,25 @@ public class DataLoad {
                         yllcorner= Float.parseFloat(temp[1]);
                     }
                     else{
-                        if (row%4==0) {
+                        if (row%3==0) {
                             for (int i = 0; i < temp.length; i = i + 3) {
                                 if (!temp[i].equals(nodatavalue)) {
+                                    float tempValue =0;
 
                                     float data = 4f / ncols * i;
                                     dataSource.add(data);
+                                    tempValue = (data>0?data:-data);
+                                    scaleX = (scaleX>tempValue?scaleX:tempValue);
+
                                     data = 4f - 4f / nrows * row;
                                     dataSource.add(data);
+                                    tempValue = (data>0?data:-data);
+                                    scaleY = (scaleY>tempValue?scaleY:tempValue);
+
                                     data = Float.parseFloat(temp[i]);
                                     dataSource.add(data);
+                                    tempValue = (data>0?data:-data);
+                                    scaleZ = (scaleZ>tempValue?scaleZ:tempValue);
                                 }
 
                             }
@@ -134,7 +110,7 @@ public class DataLoad {
 
     //生成txt
     public static void writeTxt(List<Float> list){
-        File file2 = new File("/Users/zuoxiao/常用资料/毕业设计/资料/示例数据/dem包/seven.txt");
+        File file2 = new File("/Users/zuoxiao/Downloads/s/s.txt");
         try {
             PrintStream ps = new PrintStream(new FileOutputStream(file2));//构造输出流对象
             for (int i = 0; i < list.size()-2; i=i+3) {
