@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Demo2</string>
+    <string name="app_name">地形三维可视化程序</string>
+    <string name="ButtonText">进行三角剖分和纹理映射</string>
 </resources>

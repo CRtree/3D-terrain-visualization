@@ -3,14 +3,10 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:id="@+id/activity_main"
-    >
-    <SeekBar
-        android:id="@+id/SeekBar01"
+              android:id="@+id/activity_main2">
+    <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:max="100"
-        android:progress="0"
-        >
-    </SeekBar>
+        android:id="@+id/button1"
+        android:text="@string/ButtonText"/>
 </LinearLayout>

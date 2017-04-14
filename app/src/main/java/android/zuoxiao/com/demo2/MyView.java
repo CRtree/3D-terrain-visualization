@@ -23,6 +23,11 @@ public class MyView extends GLSurfaceView {
     private final float TOUCH_SCALE_FACTOR = 180.0f/320;//角度缩放比例
     private float mPreviousY;//上次的触控位置Y坐标
     private float mPreviousX;//上次的触控位置X坐标
+    float lightOffset=-6;//灯光的位置或方向的偏移量
+
+    public void setLightOffset(float lightOffset) {
+        this.lightOffset = lightOffset;
+    }
 
     SceneRenderer mRenderer;
 
@@ -85,7 +90,7 @@ public class MyView extends GLSurfaceView {
             //调用此方法计算产生透视投影矩阵
             MatrixState.setProjectFrustum(-ratio, ratio, -1, 1, 1, 10);
             // 调用此方法产生摄像机9参数位置矩阵
-            MatrixState.setCamera(0, 0f, 3.5f,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
+            MatrixState.setCamera(0, 0f, 4.5f,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
 
             MatrixState.setInitMatrix();
         }
@@ -95,7 +100,7 @@ public class MyView extends GLSurfaceView {
              //清除深度缓冲与颜色缓冲
             GLES20.glClear( GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
             //初始化光源位置
-            MatrixState.setLightLocation(0f, 5f, 10f);
+            MatrixState.setLightLocation(lightOffset, 5f, 5f);
             //保护现场
             MatrixState.pushMatrix();
 
