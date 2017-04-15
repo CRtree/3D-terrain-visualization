@@ -6,6 +6,7 @@
 （3）给三角网贴上地形纹理；  
 （4）设置视角变换，加上光照。
 ## 三维散点图绘制：  
-<img width="300" height="450" src = "app/src/main/res/drawable/screenshot1.png"/>   
+<img width="300" height="450" src = "app/src/main/res/drawable/screenshot4.png"/>   
+<img width="300" height="450" src = "app/src/main/res/drawable/screenshot3.png"/>   
 ## 三角剖分并且贴图渲染:   
-<img width="300" height="450" src = "app/src/main/res/drawable/screenshot2.png"/>
+<img width="300" height="450" src = "app/src/main/res/drawable/screenshot5.png"/>
