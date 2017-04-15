@@ -9,4 +9,8 @@
 <img width="300" height="450" src = "app/src/main/res/drawable/screenshot4.png"/>   
 <img width="300" height="450" src = "app/src/main/res/drawable/screenshot3.png"/>   
 ## 三角剖分并且贴图渲染:   
-<img width="300" height="450" src = "app/src/main/res/drawable/screenshot5.png"/>
+<img width="300" height="450" src = "app/src/main/res/drawable/screenshot5.png"/>  
+## 项目导入
+下载本项目后，用Android studio打开。  
+## 结束语
+欢迎各位高手提出意见，共同进步！
