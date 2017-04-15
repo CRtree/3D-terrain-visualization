@@ -18,6 +18,7 @@ public class Main2Activity extends AppCompatActivity {
     public static String fliename = "5.asc";
     public static int rowSet = 7;  //7 or 3
     public static int colSet = 8;  //8 or 3
+    public static float cameraSet = 5f;  //5 or 4
     MyView2 myView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class Main2Activity extends AppCompatActivity {
                 fliename = "5.asc";
                 rowSet = 7;
                 colSet = 8;
-                //onCreate(null);
+                cameraSet = 5f;
                 onPause();
                 onResume();
                 break;
@@ -87,6 +88,7 @@ public class Main2Activity extends AppCompatActivity {
                 fliename = "7.asc";
                 rowSet = 3;
                 colSet = 3;
+                cameraSet = 4f;
                 onPause();
                 onResume();
                 break;

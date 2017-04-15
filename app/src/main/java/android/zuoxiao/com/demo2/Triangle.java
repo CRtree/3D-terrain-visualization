@@ -50,8 +50,8 @@ public class Triangle {
         vCount=list.size()/3;
         float[] vertices =  new float[list.size()];
         for (int i = 0; i < list.size()-2; i=i+3) {
-            vertices[i] = 6f*list.get(i)/DataLoad.scaleX-4.5f;
-            vertices[i+1] = 6f*list.get(i+1)/DataLoad.scaleY-4.5f;
+            vertices[i] = 6f*list.get(i)/DataLoad.scaleX-4f;
+            vertices[i+1] = 6f*list.get(i+1)/DataLoad.scaleY-4f;
             vertices[i+2] = 1.5f*list.get(i+2)/DataLoad.scaleZ;
         }
 

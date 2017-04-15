@@ -65,7 +65,7 @@ public class MyView2 extends GLSurfaceView{
             //调用此方法计算产生透视投影矩阵
             MatrixState.setProjectFrustum(-ratio, ratio, -1, 1, 1, 10);
             // 调用此方法产生摄像机9参数位置矩阵
-            MatrixState.setCamera(0, 0f, 5f,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
+            MatrixState.setCamera(0, 0f, Main2Activity.cameraSet,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
 
             MatrixState.setInitMatrix();
         }
