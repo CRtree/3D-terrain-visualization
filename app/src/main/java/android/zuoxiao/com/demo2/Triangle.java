@@ -17,37 +17,34 @@ public class Triangle {
     private int muMMatrixHandle;//位置、旋转变换矩阵引用
     private int muMVPMatrixHandle;//总变换矩阵引用id
     private int maPositionHandle; //顶点位置属性引用id
-    int maColorHandle; //顶点颜色属性引用id
-    int uLightHandle;//光源属性引用id
-    int uCameraHandle;//视角属性引用id
+    private int maColorHandle; //顶点颜色属性引用id
+    private int uLightHandle;//光源属性引用id
+    private int uCameraHandle;//视角属性引用id
 
-    String mVertexShader;//顶点着色器
-    String mFragmentShader;//片元着色器
-
-    FloatBuffer mVertexBuffer;//顶点坐标数据缓冲
-    FloatBuffer mTexCoorBuffer;//纹理坐标数据缓冲
+    private FloatBuffer mVertexBuffer;//顶点坐标数据缓冲
+    private FloatBuffer mTexCoorBuffer;//纹理坐标数据缓冲
     private int vCount=0;
     float xAngle=0;//绕x轴旋转的角度
     float yAngle=0;//绕x轴旋转的角度
 
     //新增
-    int sTextureGrassHandle;//草地的id
-    int sTextureRockHandle; //石头的id
-    int landStartYYHandle;//起始x值
-    int landYSpanHandle; //长度
+    private int sTextureGrassHandle;//草地的id
+    private int sTextureRockHandle; //石头的id
+    private int landStartYYHandle;//起始x值
+    private int landYSpanHandle; //长度
 
 
-    public Triangle(MyView mv)
+    Triangle(MyView mv)
     {
         //初始化顶点坐标与着色数据
         initVertexData(mv);
         //初始化shader
         initShader(mv);
     }
-    public void initVertexData(MyView mv)
+    private void initVertexData(MyView mv)
     {
         //顶点坐标数据的初始化
-        List<Float> sourcelist = DataLoad.loadFromASC("7.asc",mv.getResources());
+        List<Float> sourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
         List<Float> list = Delaunay.doDelaunayFromGit(sourcelist);
         //list =DataLoad.loadFromASC("7.asc",mv.getResources());
         vCount=list.size()/3;
@@ -80,12 +77,12 @@ public class Triangle {
 
     }
     //初始化shader
-    public void initShader(MyView mv)
+    private void initShader(MyView mv)
     {
         //加载顶点着色器的脚本内容
-        mVertexShader=ShaderUtil.loadFromAssertsFile("vertex.sh", mv.getResources());
+        String mVertexShader = ShaderUtil.loadFromAssertsFile("vertex.sh", mv.getResources());
         //加载片元着色器的脚本内容
-        mFragmentShader=ShaderUtil.loadFromAssertsFile("frag.sh", mv.getResources());
+        String mFragmentShader = ShaderUtil.loadFromAssertsFile("frag.sh", mv.getResources());
         //基于顶点着色器与片元着色器创建程序
         mProgram = ShaderUtil.createProgram(mVertexShader, mFragmentShader);
         //获取程序中顶点位置属性引用id
@@ -112,7 +109,7 @@ public class Triangle {
         landYSpanHandle=GLES20.glGetUniformLocation(mProgram, "landYSpan");
     }
 
-    public void drawSelf(int texId,int rock_textId)
+    void drawSelf(int texId, int rock_textId)
     {
         MatrixState.rotate(xAngle, 1, 0, 0);//绕X轴转动
         MatrixState.rotate(yAngle, 0, 0, 1);//绕Y轴转动
@@ -143,8 +140,8 @@ public class Triangle {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, rock_textId);
         GLES20.glUniform1i(sTextureGrassHandle, 0);//使用0号纹理
         GLES20.glUniform1i(sTextureRockHandle, 1); //使用1号纹理
-        GLES20.glUniform1f(landStartYYHandle, 1f);//传送相应的x参数
-        GLES20.glUniform1f(landYSpanHandle, 0.45f);
+        GLES20.glUniform1f(landStartYYHandle, 0.8f);//传送相应的x参数
+        GLES20.glUniform1f(landYSpanHandle, 0.75f);
 
         //GLES20.glDrawArrays(GLES20.GL_POINTS,0, vCount);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES,0, vCount);

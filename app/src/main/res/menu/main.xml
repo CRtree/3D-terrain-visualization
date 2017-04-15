@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/tri_item"
-          android:title="triangle"/>
+<item android:id="@+id/item_1"
+      android:title="@string/menuTitle1"/>
+    <item android:id="@+id/item_2"
+          android:title="@string/menuTitle2"/>
 </menu>

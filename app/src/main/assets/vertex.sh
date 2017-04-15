@@ -34,7 +34,7 @@ void main()
    vTextureCoord = aTexCoor;//将接收的纹理坐标传递给片元着色器
    vec4 diffuseTemp,specularTemp;   //用来接收三个通道最终强度的变量
    pointLight(diffuseTemp,specularTemp,uLightLocation,vec4(0.88,0.88,0.88,1.0),vec4(0.6,0.6,0.6,1.0));
-   vAmbient= vec4(0.2,0.2,0.2,1.0);    //将环境光最终强度传给片元着色器
+   vAmbient= vec4(0.3,0.3,0.3,1.0);    //将环境光最终强度传给片元着色器
    vDiffuse=diffuseTemp;    //将散射光最终强度传给片元着色器
    vSpecular=specularTemp; 		//将镜面光最终强度传给片元着色器
    currZ=aPosition.z;		//将顶点的Y坐标传递给片元着色器

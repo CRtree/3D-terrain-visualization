@@ -17,10 +17,10 @@ import java.util.List;
  * Created by zuoxiao on 2017/4/5.
  */
 
-public class DataLoad {
-    public static float scaleX = 0;
-    public static float scaleY = 0;
-    public static float scaleZ = 0;
+class DataLoad {
+    static float scaleX = 0;
+    static float scaleY = 0;
+    static float scaleZ = 0;
 
     /**从ASC文件中读取数据
      * ncols         313
@@ -31,7 +31,7 @@ public class DataLoad {
      nodata_value  -9999.0
      * @return
      */
-    public static List<Float> loadFromASC(String fname, Resources r){
+    static List<Float> loadFromASC(String fname, Resources r){
     //public static List<Float> loadFromASC(){
         int ncols = 0;//列数
         int nrows = 0;//行数
@@ -71,10 +71,10 @@ public class DataLoad {
                         yllcorner= Float.parseFloat(temp[1]);
                     }
                     else{
-                        if (row%3==0) {
-                            for (int i = 0; i < temp.length; i = i + 3) {
+                        if (row%Main2Activity.rowSet==0) {
+                            for (int i = 0; i < temp.length; i = i + Main2Activity.colSet) {
                                 if (!temp[i].equals(nodatavalue)) {
-                                    float tempValue =0;
+                                    float tempValue;
 
                                     float data = 4f / ncols * i;
                                     dataSource.add(data);
@@ -100,8 +100,6 @@ public class DataLoad {
                 }
             }
             br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -20,11 +20,9 @@ public class ExampleUnitTest {
 
     @Test
     public void isRight(){
-        float data;
-        int nrows = 271;
-        int row =100;
-        data = 1-1f/nrows*row;
-        System.out.println(data);
+        float nrows = 271;
+        float row =100;
+        System.out.println(Math.round(nrows/row));
 
     }
 }

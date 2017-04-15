@@ -90,7 +90,7 @@ public class MyView extends GLSurfaceView {
             //调用此方法计算产生透视投影矩阵
             MatrixState.setProjectFrustum(-ratio, ratio, -1, 1, 1, 10);
             // 调用此方法产生摄像机9参数位置矩阵
-            MatrixState.setCamera(0, 0f, 4.5f,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
+            MatrixState.setCamera(0, 0f, 5f,  0f, 0f, 0f,  0f, 1.0f, 0.0f);
 
             MatrixState.setInitMatrix();
         }
@@ -100,7 +100,7 @@ public class MyView extends GLSurfaceView {
              //清除深度缓冲与颜色缓冲
             GLES20.glClear( GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
             //初始化光源位置
-            MatrixState.setLightLocation(lightOffset, 5f, 5f);
+            MatrixState.setLightLocation(lightOffset, 4f, 7f);
             //保护现场
             MatrixState.pushMatrix();
 
