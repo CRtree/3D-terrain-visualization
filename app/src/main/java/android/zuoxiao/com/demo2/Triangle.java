@@ -7,6 +7,8 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.List;
 
+import io.github.jdiemke.triangulation.Triangle2D;
+
 /**
  * Created by zuoxiao on 2017/4/4.
  */
@@ -45,7 +47,9 @@ public class Triangle {
     {
         //顶点坐标数据的初始化
         List<Float> sourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
-        List<Float> list = Delaunay.doDelaunayFromGit(sourcelist);
+        //List<Float> sourcelist = DataLoad.loadFromASC();
+        List<Triangle2D> trianglelist = Delaunay.doDelaunayFromGit(sourcelist);
+        List<Float> list = Delaunay.addHight(trianglelist,sourcelist);
         //list =DataLoad.loadFromASC("7.asc",mv.getResources());
         vCount=list.size()/3;
         float[] vertices =  new float[list.size()];

@@ -10,12 +10,14 @@ import org.junit.Test;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-       // assertEquals(4, 2 + 2);
 //        List<Float> list = DataLoad.loadFromASC();
-//        System.out.println("采集了"+list.size()+"个点");
-//        List<Float> tlist =Delaunay.doDelaunayFromGit(list);
-//        System.out.println("生成了"+list.size()+"个点");
-        //DataLoad.writeTxt(list);
+//        System.out.println("采集了"+list.size()/3+"个点");
+//        List<Triangle2D> trianglelist =Delaunay.doDelaunayFromGit(list);
+//        System.out.println("生成了"+trianglelist.size()+"个三角形");
+//        List<Float> res = Delaunay.addHight(trianglelist,list);
+//        for (int i = 0; i < res.size()-2; i=i+3) {
+//            System.out.println(res.get(i)+","+res.get(i+1)+","+res.get(i+2));
+//        }
     }
 
     @Test

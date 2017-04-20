@@ -7,6 +7,8 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.List;
 
+import io.github.jdiemke.triangulation.Triangle2D;
+
 /**
  * Created by zuoxiao on 2017/4/12.
  */
@@ -34,7 +36,10 @@ class PointCloud {
     private void initVertexData(MyView2 mv)
     {
         //顶点坐标数据的初始化
-        List<Float> list = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
+        List<Float> sourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
+        //List<Float> sourcelist = DataLoad.loadFromASC();
+        List<Triangle2D> trianglelist = Delaunay.doDelaunayFromGit(sourcelist);
+        List<Float> list = Delaunay.doEdge(trianglelist,sourcelist);
         vCount=list.size()/3;
         float[] vertices =  new float[list.size()];
         for (int i = 0; i < list.size()-2; i=i+3) {
@@ -85,7 +90,7 @@ class PointCloud {
         //允许顶点位置数据数组
         GLES20.glEnableVertexAttribArray(maPositionHandle);
 
-        GLES20.glDrawArrays(GLES20.GL_POINTS,0, vCount);
+        GLES20.glDrawArrays(GLES20.GL_LINES,0, vCount);
 
     }
 }

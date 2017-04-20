@@ -40,14 +40,14 @@ class DataLoad {
         float xllcorner=0;//第一个像素的x坐标
         float yllcorner=0;//第一个像素的y坐标
 
-        //File file = new File("/Users/zuoxiao/Downloads/s/s1.asc");
+        File file = new File("/Users/zuoxiao/Downloads/s/s1.asc");
         List<Float> dataSource = new ArrayList<>();
         try {
             int row=0;
             InputStream inputStream = r.getAssets().open(fname);
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader br = new BufferedReader(inputStreamReader);
-           // BufferedReader br = new BufferedReader(new FileReader(file));
+            //BufferedReader br = new BufferedReader(new FileReader(file));
             String s;
             while((s = br.readLine())!=null){
                 if(s!="") {
@@ -100,6 +100,8 @@ class DataLoad {
                 }
             }
             br.close();
+            inputStreamReader.close();
+            inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
