@@ -1,4 +1,4 @@
-package android.zuoxiao.com.demo2;
+package android.zuoxiao.com.demo2.myView;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,6 +7,9 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 import android.view.MotionEvent;
+import android.zuoxiao.com.demo2.util.MatrixState;
+import android.zuoxiao.com.demo2.paint.Triangle;
+import android.zuoxiao.com.demo2.activity.Main2Activity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,7 +63,7 @@ public class MyView extends GLSurfaceView {
 
         //山的纹理id
         int mountionId;
-        int rockId;
+        //int plainid;
 
         @Override
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -72,8 +75,7 @@ public class MyView extends GLSurfaceView {
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
             //初始化纹理
             try {
-                mountionId = initTexture("timg-2.jpeg");
-                rockId = initTexture("timg.jpeg");
+                mountionId = initTexture("bigOne.png");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,13 +102,13 @@ public class MyView extends GLSurfaceView {
              //清除深度缓冲与颜色缓冲
             GLES20.glClear( GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
             //初始化光源位置
-            MatrixState.setLightLocation(lightOffset, 4f, 7f);
+            MatrixState.setLightLocation(0f, 2f, 7f);
             //保护现场
             MatrixState.pushMatrix();
 
             //绘制三角形对
             MatrixState.pushMatrix();
-            tle.drawSelf(mountionId,rockId);
+            tle.drawSelf(mountionId);
             MatrixState.popMatrix();
 
             //恢复现场

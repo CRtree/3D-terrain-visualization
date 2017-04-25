@@ -10,21 +10,31 @@ import org.junit.Test;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-//        List<Float> list = DataLoad.loadFromASC();
-//        System.out.println("采集了"+list.size()/3+"个点");
-//        List<Triangle2D> trianglelist =Delaunay.doDelaunayFromGit(list);
-//        System.out.println("生成了"+trianglelist.size()+"个三角形");
-//        List<Float> res = Delaunay.addHight(trianglelist,list);
-//        for (int i = 0; i < res.size()-2; i=i+3) {
-//            System.out.println(res.get(i)+","+res.get(i+1)+","+res.get(i+2));
+//        float[][] pictures = DataLoad.loadFromASC2();
+//        System.out.println("有"+pictures.length+"行，"+pictures[0].length+"列");
+//        Point[][] pictures2 = DataLoad.getPictures(pictures);
+//        System.out.println("裁剪后有"+pictures2.length+"行，"+pictures2[0].length+"列");
+//        Point[][] pictures3 = SimplificationPoint.getNormalArrays(pictures2);
+//        System.out.println("得到法向量数组有"+pictures3.length+"行，"+pictures3[0].length+"列");
+//        float[][] picture4 = SimplificationPoint.getCurvatureArray(pictures3);
+//        System.out.println("得到曲率数组有"+picture4.length+"行，"+picture4[0].length+"列");
+//        List<Point> list= SimplificationPoint.pickCurvature(picture4,pictures2);
+//        float xMax=0,xMin=0,yMax=0,yMin=0;
+//        for (int i = 0; i < list.size(); i++) {
+//            Point point = list.get(i);
+//            xMax = xMax>point.x?xMax:point.x;
+//            xMin = xMin<point.x?xMin:point.x;
+//            yMax = yMax>point.y?yMax:point.y;
+//            yMin = yMin<point.y?yMin:point.y;
+//
 //        }
+//        System.out.println("Xmax="+xMax+",Xmin="+xMin+",yMax="+yMax+",yMin="+yMin);
+//        System.out.println("精简后，总共剩下的点有"+list.size()+"个");
+
     }
 
     @Test
     public void isRight(){
-        float nrows = 271;
-        float row =100;
-        System.out.println(Math.round(nrows/row));
 
     }
 }

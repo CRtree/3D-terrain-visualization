@@ -1,4 +1,4 @@
-package android.zuoxiao.com.demo2;
+package android.zuoxiao.com.demo2.util;
 
 import android.content.res.Resources;
 import android.opengl.GLES20;
@@ -14,7 +14,7 @@ import java.io.InputStream;
 
 public class ShaderUtil {
     //加载指定着色器
-    public static int loadShader(int shaderType, String source){
+    private static int loadShader(int shaderType, String source){
         int shader = GLES20.glCreateShader(shaderType);
         if (shader != 0){
             GLES20.glShaderSource(shader,source);
@@ -32,7 +32,7 @@ public class ShaderUtil {
         return shader;
     }
     //创建着色器程序的方法
-    public static int createProgram(String vertexSource,String fragmentSource){
+    public static int createProgram(String vertexSource, String fragmentSource){
         int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexSource);
         if (vertexShader == 0){
             return 0;
@@ -67,9 +67,9 @@ public class ShaderUtil {
         }
         return program;
     }
-    public static void checkGlError(String op){
+    private static void checkGlError(String op){
         int error;
-        while((error = GLES20.glGetError()) !=GLES20.GL_NO_ERROR){
+        if((error = GLES20.glGetError()) !=GLES20.GL_NO_ERROR){
             Log.e("ES20_ERROR", op + ": glError " + error);
             throw new RuntimeException(op + ": glError " + error);
         }
@@ -79,7 +79,7 @@ public class ShaderUtil {
         String result = null;
         try {
             InputStream in = r.getAssets().open(fname);
-            int ch=0;
+            int ch;
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             while ((ch=in.read())!=-1){
                 baos.write(ch);

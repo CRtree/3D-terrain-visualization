@@ -5,8 +5,8 @@
               android:layout_height="fill_parent"
               android:id="@+id/activity_main2">
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        android:text="@string/ButtonText"/>
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/button1"
+    android:text="@string/ButtonText"/>
 </LinearLayout>

@@ -1,7 +1,6 @@
-package android.zuoxiao.com.demo2;
+package android.zuoxiao.com.demo2.arithmetic;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import io.github.jdiemke.triangulation.DelaunayTriangulator;
@@ -29,8 +28,7 @@ public class Delaunay {
         } catch (NotEnoughPointsException e) {
             e.printStackTrace();
         }
-        List<Triangle2D> triangleSoup = delaunayTriangulator.getTriangles();
-        return triangleSoup;
+        return delaunayTriangulator.getTriangles();
     }
     //加上高程
     public static List<Float> addHight(List<Triangle2D> triangleSoup,List<Float> sourcelist){
@@ -126,18 +124,5 @@ public class Delaunay {
 
         }
         return result;
-    }
-    //坐标缩放用
-    public static float getMaxNumber(List<Float> list){
-        Iterator<Float> iterator = list.iterator();
-        float max = 0.0f;
-        while (iterator.hasNext()){
-            Float temp = iterator.next();
-            Float index = temp>0.0f?temp:-temp;
-            if (index > max){
-                max = index;
-            }
-        }
-        return max*8f;
     }
 }

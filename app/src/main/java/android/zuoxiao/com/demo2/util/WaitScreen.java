@@ -1,4 +1,4 @@
-package android.zuoxiao.com.demo2;
+package android.zuoxiao.com.demo2.util;
 
 import android.content.Context;
 import android.os.Handler;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.PopupWindow;
+import android.zuoxiao.com.demo2.R;
 
 /**
  * Created by zuoxiao on 2017/4/14.
@@ -22,30 +23,18 @@ public class WaitScreen {
         view= LayoutInflater.from(context).inflate(R.layout.poplayout, null);
         popupWindow=new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,  ActionBar.LayoutParams.MATCH_PARENT);
     }
-    /**
-     * 弹出等待提示框
-     * @author JPH
-     * @date 2015-4-17 下午1:35:00
-     * @return
-     */
+
+
     public PopupWindow show() {
         popupWindow.showAsDropDown(view);
         return popupWindow;
     }
-    /**
-     * 以动画的方式关闭等待弹屏
-     * @author JPH
-     * @date 2015-4-17 上午10:40:39
-     */
+
+
     public void close() {
         if (popupWindow!=null&&popupWindow.isShowing()) {
             popupWindow.setFocusable(false);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    popupWindow.dismiss();
-                }
-            }, 500);
+            new Handler().postDelayed(() -> popupWindow.dismiss(), 500);
             View progressBar1=view.findViewById(R.id.progressBar1);
             progressBar1.setVisibility(View.GONE);
             View left=view.findViewById(R.id.left);
@@ -62,11 +51,8 @@ public class WaitScreen {
             right.startAnimation(rightAnimation);
         }
     }
-    /**
-     * 关闭弹屏
-     * @author JPH
-     * @date 2015-4-17 下午2:59:33
-     */
+
+
     public void dismiss() {
         if (popupWindow!=null&&popupWindow.isShowing()) {
             popupWindow.dismiss();

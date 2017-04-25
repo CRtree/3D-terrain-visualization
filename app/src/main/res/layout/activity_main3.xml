@@ -3,6 +3,10 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:id="@+id/activity_main"
-    >
+              android:id="@+id/activity_main3">
+<Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/button2"
+    android:text="@string/ButtonText2"/>
 </LinearLayout>

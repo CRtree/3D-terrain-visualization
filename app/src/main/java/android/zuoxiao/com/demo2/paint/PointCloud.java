@@ -1,22 +1,25 @@
-package android.zuoxiao.com.demo2;
+package android.zuoxiao.com.demo2.paint;
 
 import android.opengl.GLES20;
+import android.zuoxiao.com.demo2.util.DataLoad;
+import android.zuoxiao.com.demo2.util.MatrixState;
+import android.zuoxiao.com.demo2.util.ShaderUtil;
+import android.zuoxiao.com.demo2.activity.Main2Activity;
+import android.zuoxiao.com.demo2.myView.MyView2;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.List;
 
-import io.github.jdiemke.triangulation.Triangle2D;
-
 /**
  * Created by zuoxiao on 2017/4/12.
  */
 
-class PointCloud {
+public class PointCloud {
 
-    float xAngle=0;//绕x轴旋转的角度
-    float yAngle=0;//绕x轴旋转的角度
+    public float xAngle=0;//绕x轴旋转的角度
+    public float yAngle=0;//绕x轴旋转的角度
 
     private int mProgram;//自定义渲染管线程序id
     private int muMVPMatrixHandle;//总变换矩阵引用id
@@ -26,7 +29,10 @@ class PointCloud {
     private FloatBuffer mVertexBuffer;//顶点坐标数据缓冲
     private int vCount=0;
 
-    PointCloud(MyView2 mv) {
+    static List<Float> PointCloudSourcelist;
+    public static boolean pointFlag = false;
+
+    public PointCloud(MyView2 mv) {
         //初始化顶点坐标与着色数据
         initVertexData(mv);
         //初始化shader
@@ -36,17 +42,23 @@ class PointCloud {
     private void initVertexData(MyView2 mv)
     {
         //顶点坐标数据的初始化
-        List<Float> sourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
-        //List<Float> sourcelist = DataLoad.loadFromASC();
-        List<Triangle2D> trianglelist = Delaunay.doDelaunayFromGit(sourcelist);
-        List<Float> list = Delaunay.doEdge(trianglelist,sourcelist);
-        vCount=list.size()/3;
-        float[] vertices =  new float[list.size()];
-        for (int i = 0; i < list.size()-2; i=i+3) {
-            vertices[i] = 6f*list.get(i)/DataLoad.scaleX-4f;
-            vertices[i+1] = 6f*list.get(i+1)/DataLoad.scaleY-4f;
-            vertices[i+2] = 1.5f*list.get(i+2)/DataLoad.scaleZ;
+        if (!pointFlag) {
+            PointCloudSourcelist = DataLoad.doSimpleCloud(Main2Activity.fliename, mv.getResources());
+            //PointCloudSourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
+            pointFlag = true;
         }
+        vCount=PointCloudSourcelist.size()/3;
+        float[] vertices =  new float[PointCloudSourcelist.size()];
+        //点云精简算法用
+        for (int i = 0; i < PointCloudSourcelist.size(); i++) {
+            vertices[i] = PointCloudSourcelist.get(i);
+        }
+        //离散取点用
+//        for (int i = 0; i < list.size()-2; i=i+3) {
+//            vertices[i] = 6f*list.get(i)/DataLoad.scaleX-4f;
+//            vertices[i+1] = 6f*list.get(i+1)/DataLoad.scaleY-4f;
+//            vertices[i+2] = 1.5f*list.get(i+2)/DataLoad.scaleZ;
+//        }
 
         ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length*4);
         vbb.order(ByteOrder.nativeOrder());
@@ -74,7 +86,7 @@ class PointCloud {
 
     }
 
-    void drawSelf()
+    public void drawSelf()
     {
         MatrixState.rotate(xAngle, 1, 0, 0);//绕X轴转动
         MatrixState.rotate(yAngle, 0, 0, 1);//绕Y轴转动
@@ -90,7 +102,6 @@ class PointCloud {
         //允许顶点位置数据数组
         GLES20.glEnableVertexAttribArray(maPositionHandle);
 
-        GLES20.glDrawArrays(GLES20.GL_LINES,0, vCount);
-
+        GLES20.glDrawArrays(GLES20.GL_POINTS,0, vCount);
     }
 }
