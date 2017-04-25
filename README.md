@@ -16,9 +16,8 @@ The program implements the following functions:
 <img width="300" height="450" src = "app/src/main/res/drawable/screenshot4.png"/>   
 <img width="300" height="450" src = "app/src/main/res/drawable/screenshot3.png"/>   
 ## 三角剖分： 
-<img width="300" height="450" src = "app/src/main/res/drawable/Screenshot7.png"/>  
-## 贴图渲染:  
-<img width="300" height="450" src = "app/src/main/res/drawable/Screenshot6.png"/>  
-## 项目导入:  
+<img width="300" height="450" src = "app/src/main/res/drawable/Screenshot7.png"/>   
+<img width="300" height="450" src = "app/src/main/res/drawable/Screenshot6.png"/>   
+## 项目导入:  
 下载本项目后，用Android studio打开。  
 download the program, and open it with Android studio.
