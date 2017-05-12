@@ -22,7 +22,7 @@ public class DataLoad {
    public static float scaleY = 0;
    public static float scaleZ = 0;
 
-static List<Float> loadFromASC(String fname, Resources r){
+public static List<Float> loadFromASC(String fname, Resources r){
     //public static List<Float> loadFromASC(){
         int ncols = 0;//列数
         int nrows = 0;//行数
@@ -236,12 +236,16 @@ private static float[][] loadFromASC2(String fname, Resources r){
         //float[][] picture1 = loadFromASC2();
         //对初始点集进行筛选，去杂
         Point[][] pictureCut = getPictures(picture1);
+
+        long startTime = System.currentTimeMillis();   //获取开始时间
         //求取法向量数组
         Point[][] normalArrays = SimplificationPoint.getNormalArrays(pictureCut);
         //求取曲率数组，判断地形地势
         float[][] curvatureArray = SimplificationPoint.getCurvatureArray(normalArrays);
         //精简点云
         List<Point> list= SimplificationPoint.pickCurvature(curvatureArray,pictureCut);
+        long endTime=System.currentTimeMillis(); //获取结束时间
+        System.out.println("精简运行时间： "+(startTime-endTime)+"ms");
 
         List<Float> floatList = new ArrayList<>(list.size()*3);
 

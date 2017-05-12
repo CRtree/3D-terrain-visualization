@@ -75,7 +75,7 @@ public class MyView extends GLSurfaceView {
             GLES20.glEnable(GLES20.GL_DEPTH_TEST);
             //初始化纹理
             try {
-                mountionId = initTexture("bigOne.png");
+                mountionId = initTexture("big3.png");
             } catch (IOException e) {
                 e.printStackTrace();
             }

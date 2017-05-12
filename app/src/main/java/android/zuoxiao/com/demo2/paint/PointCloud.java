@@ -1,11 +1,11 @@
 package android.zuoxiao.com.demo2.paint;
 
 import android.opengl.GLES20;
+import android.zuoxiao.com.demo2.activity.Main2Activity;
+import android.zuoxiao.com.demo2.myView.MyView2;
 import android.zuoxiao.com.demo2.util.DataLoad;
 import android.zuoxiao.com.demo2.util.MatrixState;
 import android.zuoxiao.com.demo2.util.ShaderUtil;
-import android.zuoxiao.com.demo2.activity.Main2Activity;
-import android.zuoxiao.com.demo2.myView.MyView2;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -44,7 +44,10 @@ public class PointCloud {
         //顶点坐标数据的初始化
         if (!pointFlag) {
             PointCloudSourcelist = DataLoad.doSimpleCloud(Main2Activity.fliename, mv.getResources());
-            //PointCloudSourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
+//            long startTime = System.currentTimeMillis();   //获取开始时间
+//            PointCloudSourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
+//            long endTime=System.currentTimeMillis(); //获取结束时间
+//            System.out.println("隔点精简运行时间： "+(startTime-endTime)+"ms");
             pointFlag = true;
         }
         vCount=PointCloudSourcelist.size()/3;
@@ -54,10 +57,10 @@ public class PointCloud {
             vertices[i] = PointCloudSourcelist.get(i);
         }
         //离散取点用
-//        for (int i = 0; i < list.size()-2; i=i+3) {
-//            vertices[i] = 6f*list.get(i)/DataLoad.scaleX-4f;
-//            vertices[i+1] = 6f*list.get(i+1)/DataLoad.scaleY-4f;
-//            vertices[i+2] = 1.5f*list.get(i+2)/DataLoad.scaleZ;
+//        for (int i = 0; i < PointCloudSourcelist.size()-2; i=i+3) {
+//            vertices[i] = 6f*PointCloudSourcelist.get(i)/DataLoad.scaleX-4f;
+//            vertices[i+1] = 6f*PointCloudSourcelist.get(i+1)/DataLoad.scaleY-4f;
+//            vertices[i+2] = 1.5f*PointCloudSourcelist.get(i+2)/DataLoad.scaleZ;
 //        }
 
         ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length*4);

@@ -150,19 +150,30 @@ public class SimplificationPoint {
         Collections.sort(list4);
         Collections.sort(list5);
 
-        for (int i = 0; i < list1.size(); i=i+15) {
+//        Random random = new Random();
+        for (int i = 0; i < list1.size(); i=i+17) {
+//            int s = random.nextInt(list1.size()-1);
+//            list1.get(s).isDelete = false;
             list1.get(i).isDelete = false;
         }
         for (int i = 0; i < list2.size(); i=i+ Main2Activity.secondScale) {
+//            int s = random.nextInt(list2.size()-1);
+//            list2.get(s).isDelete = false;
             list2.get(i).isDelete = false;
         }
         for (int i = 0; i < list3.size(); i=i+Main2Activity.thirdScale) {
+//            int s = random.nextInt(list3.size()-1);
+//            list3.get(s).isDelete = false;
             list3.get(i).isDelete = false;
         }
         for (int i = 0; i < list4.size(); i=i+100) {
+//            int s = random.nextInt(list4.size()-1);
+//            list4.get(s).isDelete = false;
             list4.get(i).isDelete = false;
         }
         for (int i = 0; i < list5.size(); i=i+135) {
+//            int s = random.nextInt(list5.size()-1);
+//            list5.get(s).isDelete = false;
             list5.get(i).isDelete = false;
         }
         int sum = list1.size()+list2.size()+list3.size()+list4.size()+list5.size();

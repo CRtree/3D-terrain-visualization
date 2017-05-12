@@ -2,9 +2,9 @@ package android.zuoxiao.com.demo2.paint;
 
 import android.opengl.GLES20;
 import android.zuoxiao.com.demo2.arithmetic.Delaunay;
+import android.zuoxiao.com.demo2.myView.MyView;
 import android.zuoxiao.com.demo2.util.MatrixState;
 import android.zuoxiao.com.demo2.util.ShaderUtil;
-import android.zuoxiao.com.demo2.myView.MyView;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -12,6 +12,8 @@ import java.nio.FloatBuffer;
 import java.util.List;
 
 import io.github.jdiemke.triangulation.Triangle2D;
+
+import static android.zuoxiao.com.demo2.paint.PointCloud.PointCloudSourcelist;
 
 /**
  * Created by zuoxiao on 2017/4/4.
@@ -47,7 +49,7 @@ public class Triangle {
     {
         //顶点坐标数据的初始化
         //List<Float> sourcelist = DataLoad.loadFromASC(Main2Activity.fliename,mv.getResources());
-        List<Float> sourcelist = PointCloud.PointCloudSourcelist;
+        List<Float> sourcelist = PointCloudSourcelist;
         List<Triangle2D> trianglelist = Triangle1.trianglelist;
         List<Float> list = Delaunay.addHight(trianglelist,sourcelist);
         vCount=list.size()/3;
@@ -55,6 +57,12 @@ public class Triangle {
         for (int i = 0; i < list.size(); i++) {
             vertices[i] = list.get(i);
         }
+//        for (int i = 0; i < list.size()-2; i=i+3) {
+//            vertices[i] = 6f*list.get(i)/ DataLoad.scaleX-4f;
+//            vertices[i+1] = 6f*list.get(i+1)/DataLoad.scaleY-4f;
+//            vertices[i+2] = 1.5f*list.get(i+2)/DataLoad.scaleZ;
+//        }
+
         ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length*4);
         vbb.order(ByteOrder.nativeOrder());
         mVertexBuffer = vbb.asFloatBuffer();

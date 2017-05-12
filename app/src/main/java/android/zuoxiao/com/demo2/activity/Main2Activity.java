@@ -18,9 +18,11 @@ import java.lang.reflect.Field;
 
 public class Main2Activity extends AppCompatActivity {
     public static String fliename = "5.asc";
-    public static int rowSet = 7;  //7 or 3
-    public static int colSet = 8;  //8 or 3
-    public static float cameraSet = 7f;  //5 or 4
+    public static int rowSet = 6;
+    public static int colSet = 5;
+    public static float cameraSet = 7.9f;
+    public static int time = 10;
+
 
     public static int secondScale = 25;
     public static int thirdScale = 60;
@@ -82,13 +84,16 @@ public class Main2Activity extends AppCompatActivity {
         Triangle1.triangleFlag = false;
         PointCloud.pointFlag = false;
         Main3Activity.hasloaded = false;
-        cameraSet = 7f;
+        cameraSet = 7.9f;
 
         switch(item.getItemId()){
             case R.id.item_1:
                 fliename = "5.asc";
                 secondScale = 25;
                 thirdScale = 60;
+                time = 10;
+                rowSet = 6;
+                colSet = 5;
                 onPause();
                 onResume();
                 break;
@@ -96,6 +101,9 @@ public class Main2Activity extends AppCompatActivity {
                 fliename = "10.asc";
                 secondScale = 40;
                 thirdScale = 70;
+                time = 14;
+                rowSet = 6;
+                colSet = 5;
                 onPause();
                 onResume();
                 break;

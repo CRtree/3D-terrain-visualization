@@ -22,15 +22,15 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myView=new MyView3(this);
-        int time = 25;
+
         if (hasloaded) {
-            time = 2;
+            Main2Activity.time = 2;
         }
             new Handler().postDelayed(() -> {
                 if (popupWindow != null) {
                     waitScreen.close();
                 }
-            }, time * 1000);
+            }, Main2Activity.time * 1000);
             hasloaded = true;
 
         setContentView(R.layout.activity_main3);
